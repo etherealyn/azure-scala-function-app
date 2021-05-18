@@ -1,34 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>azure-scala-functions-app</artifactId>
+    <artifactId>azure-scala-function-app</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Azure Java Functions</name>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>11</java.version>
         <azure.functions.maven.plugin.version>1.11.0</azure.functions.maven.plugin.version>
         <azure.functions.java.library.version>1.4.2</azure.functions.java.library.version>
-        <functionAppName>azure-scala-functions-app-20210518104530221</functionAppName>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <encoding>UTF-8</encoding>
+        <functionAppName>azure-scala-function-app-20210519152638152</functionAppName>
         <scala.version>2.12.6</scala.version>
         <scala.compat.version>2.12</scala.compat.version>
         <spec2.version>4.2.0</spec2.version>
+        <maven.compiler.version>3.8.1</maven.compiler.version>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
     </properties>
 
     <dependencies>
+        <!--  Scala -->
         <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-library</artifactId>
             <version>${scala.version}</version>
         </dependency>
 
+        <!--  Azure Functions  -->
         <dependency>
             <groupId>com.microsoft.azure.functions</groupId>
             <artifactId>azure-functions-java-library</artifactId>
@@ -42,23 +45,28 @@
             <version>5.4.2</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-scala_${scala.compat.version}</artifactId>
             <version>1.16.37</version>
+            <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.scalatest</groupId>
             <artifactId>scalatest_${scala.compat.version}</artifactId>
             <version>3.0.5</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.specs2</groupId>
             <artifactId>specs2-core_${scala.compat.version}</artifactId>
             <version>${spec2.version}</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.specs2</groupId>
             <artifactId>specs2-junit_${scala.compat.version}</artifactId>
@@ -70,6 +78,7 @@
     <build>
         <sourceDirectory>src/main/scala</sourceDirectory>
         <testSourceDirectory>src/test/scala</testSourceDirectory>
+
         <plugins>
             <plugin>
                 <!-- see http://davidb.github.com/scala-maven-plugin -->
@@ -91,6 +100,17 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -100,6 +120,7 @@
                     <skipTests>true</skipTests>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.scalatest</groupId>
                 <artifactId>scalatest-maven-plugin</artifactId>
@@ -120,6 +141,7 @@
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>com.microsoft.azure</groupId>
                 <artifactId>azure-functions-maven-plugin</artifactId>
@@ -143,7 +165,7 @@
                     <runtime>
                         <!-- runtime os, could be windows, linux or docker-->
                         <os>windows</os>
-                        <javaVersion>8</javaVersion>
+                        <javaVersion>11</javaVersion>
                     </runtime>
                     <appSettings>
                         <property>
@@ -161,6 +183,7 @@
                     </execution>
                 </executions>
             </plugin>
+
             <!--Remove obj folder generated by .NET SDK in maven clean-->
             <plugin>
                 <artifactId>maven-clean-plugin</artifactId>
