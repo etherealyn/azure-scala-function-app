@@ -10,9 +10,15 @@ This is an example of how to use the Scala language for [Azure Functions](https:
 * [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
 
 ### Run this example
-```shell script
-./mvnw clean package azure-functions:run
-```
+
+1. Build a JAR and Start Azure Functions local runtime
+    ```shell script
+    ./mvnw clean package azure-functions:run
+    ```
+2. Make a request:
+    ```shell script
+    curl -X GET "http://localhost:7071/api/ScalaFunction?name=Scala"
+    ```
 
 ## Deploy this sample on Azure
 
@@ -24,58 +30,58 @@ This is an example of how to use the Scala language for [Azure Functions](https:
 
 2. Make sure your function name is unique. To do that, rename your project from:
     ```xml
-       <functionAppName>azure-scala-function-app-20210519152638152</functionAppName> 
+   <functionAppName>azure-scala-function-app-20210519152638152</functionAppName> 
     ```
    to:
    ```xml
-       <functionAppName>azure-scala-function-app-%YOUR-NAME-HERE%></functionAppName>
+   <functionAppName>azure-scala-function-app-%YOUR-NAME-HERE%></functionAppName>
    ```
    or any other unique string.
    
 
-3. (Optionally) Find the following lines in the POM and configure your own deployment parameters 
+3. **(Optionally)** Find the following lines in the POM and configure your own deployment parameters 
 such as *resource group*, *app service plan name*, *region*, *runtime*, etc.
 
     ```xml
-      <plugin>
-        <groupId>com.microsoft.azure</groupId>
-        <artifactId>azure-functions-maven-plugin</artifactId>
-        <version>${azure.functions.maven.plugin.version}</version>
-        <configuration>
-            <!-- function app name -->
-            <appName>${functionAppName}</appName>
-            <!-- function app resource group -->
-            <resourceGroup>java-functions-group</resourceGroup>
-            <!-- function app service plan name -->
-            <appServicePlanName>java-functions-app-service-plan</appServicePlanName>
-            <!-- function app region-->
-            <!-- refers https://github.com/microsoft/azure-maven-plugins/wiki/Azure-Functions:-Configuration-Details#supported-regions for all valid values -->
-            <region>westus</region>
-            <!-- function pricingTier, default to be consumption if not specified -->
-            <!-- refers https://github.com/microsoft/azure-maven-plugins/wiki/Azure-Functions:-Configuration-Details#supported-pricing-tiers for all valid values -->
-            <!-- <pricingTier></pricingTier> -->
-            <!-- Whether to disable application insights, default is false -->
-            <!-- refers https://github.com/microsoft/azure-maven-plugins/wiki/Azure-Functions:-Configuration-Details for all valid configurations for application insights-->
-            <!-- <disableAppInsights></disableAppInsights> -->
-            <runtime>
-                <!-- runtime os, could be windows, linux or docker-->
-                <os>windows</os>
-                <javaVersion>11</javaVersion>
-            </runtime>
-            <appSettings>
-                <property>
-                    <name>FUNCTIONS_EXTENSION_VERSION</name>
-                    <value>~3</value>
-                </property>
-            </appSettings>
+    <plugin>
+      <groupId>com.microsoft.azure</groupId>
+      <artifactId>azure-functions-maven-plugin</artifactId>
+      <version>${azure.functions.maven.plugin.version}</version>
+      <configuration>
+          <!-- function app name -->
+          <appName>${functionAppName}</appName>
+          <!-- function app resource group -->
+          <resourceGroup>java-functions-group</resourceGroup>
+          <!-- function app service plan name -->
+          <appServicePlanName>java-functions-app-service-plan</appServicePlanName>
+          <!-- function app region-->
+          <!-- refers https://github.com/microsoft/azure-maven-plugins/wiki/Azure-Functions:-Configuration-Details#supported-regions for all valid values -->
+          <region>westus</region>
+          <!-- function pricingTier, default to be consumption if not specified -->
+          <!-- refers https://github.com/microsoft/azure-maven-plugins/wiki/Azure-Functions:-Configuration-Details#supported-pricing-tiers for all valid values -->
+          <!-- <pricingTier></pricingTier> -->
+          <!-- Whether to disable application insights, default is false -->
+          <!-- refers https://github.com/microsoft/azure-maven-plugins/wiki/Azure-Functions:-Configuration-Details for all valid configurations for application insights-->
+          <!-- <disableAppInsights></disableAppInsights> -->
+          <runtime>
+              <!-- runtime os, could be windows, linux or docker-->
+              <os>windows</os>
+              <javaVersion>11</javaVersion>
+          </runtime>
+          <appSettings>
+              <property>
+                  <name>FUNCTIONS_EXTENSION_VERSION</name>
+                  <value>~3</value>
+              </property>
+          </appSettings>
         </configuration>
         <executions>
-            <execution>
-                <id>package-functions</id>
-                <goals>
-                    <goal>package</goal>
-                </goals>
-            </execution>
+          <execution>
+              <id>package-functions</id>
+              <goals>
+                  <goal>package</goal>
+              </goals>
+          </execution>
         </executions>
     </plugin>
     ```
