@@ -86,10 +86,10 @@ such as *resource group*, *app service plan name*, *region*, *runtime*, etc.
     </plugin>
     ```
 
-Run the following command to deploy this sample to an Azure Functions App:
-```shell script
-./mvnw clean package azure-functions:deploy
-```
+4. Run the following command to deploy this sample to an Azure Functions App:
+    ```shell script
+    ./mvnw clean package azure-functions:deploy
+    ```
 
 ## Authors
 
