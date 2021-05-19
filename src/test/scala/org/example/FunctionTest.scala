@@ -4,17 +4,19 @@ import java.util.Optional
 import java.util.logging.Logger
 
 import com.microsoft.azure.functions.{ExecutionContext, HttpRequestMessage, HttpStatus}
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Test
+import org.junit.Test
 import org.mockito.ArgumentMatchers.any
 import org.mockito.Mockito.when
 import org.mockito.MockitoSugar.mock
+
+import org.junit.Assert._
 
 import scala.collection.JavaConverters._
 
 /**
  * Unit test for Function class.
  */
+@Test
 class FunctionTest {
   /**
    * Unit test for HttpTriggerJava method.
